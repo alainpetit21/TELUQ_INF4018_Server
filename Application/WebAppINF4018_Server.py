@@ -47,7 +47,6 @@ class RESTServiceINF4018_Server(object):
 
         return "POST"
 
-
     def GET(self):
         """ GET Description : (public visibility) :
             Unused, reserved for future usage. In a REST-ful API, this function gets call for each HTTP GET request
