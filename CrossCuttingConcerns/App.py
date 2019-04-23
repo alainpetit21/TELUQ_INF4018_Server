@@ -10,7 +10,7 @@ import logging
 class App(object):
     # ==================================================================================================================
     # Class attributes
-    obj_singleton_instance = None
+    objInstance = None
 
     # List Countainers to countains all registered model and views. In Most case only 1 of each will be used. But we
     # support more
@@ -28,7 +28,7 @@ class App(object):
     # ==================================================================================================================
     # __init__ : Constructor methode that manage the Singleton DP and generic constructor management for this object
     def __init__(self, p_str_name, debug_level = 3):
-        App.obj_singleton_instance = self   # TODO eventually create a real singleton
+        App.objInstance = self   # TODO eventually create a real singleton
 
         self.str_name = p_str_name
 

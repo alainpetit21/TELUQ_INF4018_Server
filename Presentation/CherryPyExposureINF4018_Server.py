@@ -7,7 +7,7 @@ import cherrypy
 from CrossCuttingConcerns.WebApp import CherryPyExposure
 
 
-class WebAppINF4018_Server_CherryPyExposure(CherryPyExposure):
+class CherryPyExposureINF4018_Server(CherryPyExposure):
     """
     Class WebAppINF4018_Server_CherryPyExposure Description :
         The purpose of this class is to be the "main" exposure object for the whole WebApp and either display the main

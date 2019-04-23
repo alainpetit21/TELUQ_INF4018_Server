@@ -9,8 +9,8 @@ import time
 
 # ======================================================================================================================
 # importing internal modules
-from firework.system.App import App
-from firework.system.Thread import Thread
+from CrossCuttingConcerns.App import App
+from CrossCuttingConcerns.Thread import Thread
 
 
 class CherryPyExposure(Thread):
@@ -39,7 +39,7 @@ class CherryPyExposure(Thread):
         self.rest_service = p_obj_rest_service
 
     def load(self):
-        cherrypy.config.update({'server.socket_host': '192.168.0.133',
+        cherrypy.config.update({'server.socket_host': '0.0.0.0',
                                 'server.socket_port': 8081,
                                 'request.show_tracebacks': False
                                 })
