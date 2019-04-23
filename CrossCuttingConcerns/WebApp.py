@@ -1,5 +1,7 @@
-# ======================================================================================================================
-# WebApp.py :
+"""
+Module for WebApp class. 2 vclasses in this module : WebApp and CherryPyExposure
+------------------------------------------------------------------------------------------------------------------------
+"""
 
 # ======================================================================================================================
 # importing external modules
@@ -14,9 +16,20 @@ from CrossCuttingConcerns.Thread import Thread
 
 
 class CherryPyExposure(Thread):
+    """
+    Class CherryPyExposure Description :
+        Derived from Thread (internal), this class serve as the Base class for application-side future derivation. it
+        kinda encapslutae basic Cherrypy jo into simple way of using Cherrypy.
+
+    Class Attributes (Static attributes):
+        dicConfigParams : A Python dictionary that countrain several parameters expetioly for the routes exposures
+
+    Instance Attributes :
+        None
+    """
     # ==================================================================================================================
     # Class attributes
-    conf = {
+    dicConfigParams = {
         '/': {
             'tools.sessions.on': True,
             'tools.staticdir.root': os.path.abspath(os.getcwd() + "/Web")
@@ -33,34 +46,59 @@ class CherryPyExposure(Thread):
     }
 
     # ==================================================================================================================
-    # __init__ : Constructor for a new app object
-    def __init__(self, p_obj_rest_service=None):
+    def __init__(self, pObjRESTfulService=None):
+        """ __init__ Description : (public visibility) :
+            Constructor for a new CherryPyExposure object, basically redirecting to super classes the construction.
+        """
         super().__init__("Thread-WebAppCherryPy")
-        self.rest_service = p_obj_rest_service
+        self.obJRESTfulService = pObjRESTfulService
 
+    # ==================================================================================================================
     def load(self):
+        """ load Description : (public visibility) :
+            Preparing the Thread for running.
+        """
         cherrypy.config.update({'server.socket_host': '0.0.0.0',
                                 'server.socket_port': 8081,
                                 'request.show_tracebacks': False
                                 })
 
-    def on_manage(self, param1= None):
-        cherrypy.quickstart(self, '/', self.conf)   # this call is blocking (e.g. when we go to the next line it mean that the server has ended)
-        self.is_running = False                     # This is why we need to stop the thread after the server has ended
+    # ==================================================================================================================
+    def onManage(self, param1= None):
+        """ onManage Description : (public visibility) :
+            Event (callback) for one loop of execution. In this exemple, 1 loop is all we need since quickstart is
+            blocking.
+        """
+        cherrypy.quickstart(self, '/', CherryPyExposure.dicConfigParams)    # this call is blocking (e.g. when we go to
+                                                                            # the next line it mean that the server has
+                                                                            # ended).
+        self.setRunning(False)                      # This is why we need to stop the thread after the server has ended.
+
 
 
 # ======================================================================================================================
-# class WebApp :
 class WebApp(App):
-    thread_web_exposure = None
+    """
+    Class WebApp Description :
+        Derived from App (internal), this class serve as the Base class for application-side future derivation. it
+        kinda encapslutae basic Cherrypy jo into simple way of using Cherrypy.
+
+    Class Attributes (Static attributes):
+        None
+
+    Instance Attributes :
+        objThreadWebExposure :  Received as dependy injection. It is the Èxposure side of the application that will
+                                manage the presentation layer(View) of the WebApp.
+    """
 
     # ==================================================================================================================
-    # Class Methods
-    # ==================================================================================================================
-    # __init__ : Constructor for a new app object, basically redirecting to super class the construction
-    def __init__(self, p_str_thread_name: str, obj_webapp_exposure: CherryPyExposure):
-        self.thread_web_exposure = obj_webapp_exposure
+    def __init__(self, p_str_thread_name: str, pObjWebappExposure: CherryPyExposure):
+        """ __init__ Description : (public visibility) :
+            Constructor if the WebApp. it basically overload the base constructor and start the Presentation exposure
+            (View).
+        """
         super().__init__(p_str_thread_name)
 
-        self.thread_web_exposure.start()
+        self.objThreadWebExposure = pObjWebappExposure
+        self.objThreadWebExposure.start()
         time.sleep(0.1)

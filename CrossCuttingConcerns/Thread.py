@@ -1,3 +1,8 @@
+"""
+Module for Thread class. 1 classes in this module : Thread
+------------------------------------------------------------------------------------------------------------------------
+"""
+
 # ======================================================================================================================
 # importing external modules
 from threading import Thread as BaseThread
@@ -8,34 +13,42 @@ from CrossCuttingConcerns.App import App
 
 
 # ======================================================================================================================
-# class Thread : Derived from App and the Python internal Thread (as BasedThread alias here). Implement generic methods
-#                for a thread object. The only thing that remains on client side are client specfic application logic /
-#                orchestration / etc. Thread are actually derived from App object and should be conceptually treated by
-#                client side as mini sub-program, with their own mini sub-module.
 class Thread(App, BaseThread):
+    """
+    Class WebAppINF4018_Server Description :
+        Derived from App and the Python internal Thread (as BasedThread alias here). Implement generic methods for a
+        thread object. The only thing that remains on client side are client specfic application logic / orchestration
+        / etc. Thread are actually derived from App object and should be conceptually treated by client side as mini
+        sub-program, with their own mini sub-module..
+
+    Class Attributes (Static attributes):
+        None
+
+    Instance Attributes :
+        None
+    """
 
     # ==================================================================================================================
-    # Class Methods
-    # ==================================================================================================================
-    # __init__ : Constructor for a new app object, basically redirecting to super class the construction
-    def __init__(self, p_str_thread_name):
-        BaseThread.__init__(self, name=p_str_thread_name, target=Thread._start, args=([self]))
-        App.__init__(self, p_str_thread_name)
+    def __init__(self, pStrThreadName):
+        """ __init__ Description : (public visibility) :
+            Constructor for a new Thread object, basically redirecting to super classes the construction.
+        """
+        BaseThread.__init__(self, name=pStrThreadName, target=Thread._start, args=([self]))
+        App.__init__(self, pStrThreadName)
 
     # ==================================================================================================================
-    # load :    To be implemented client-side to perform all sort of loading and creating modules
     def load(self):
+        """ load Description : (public visibility) :
+            To be implemented client-side to perform all sort of loading and creating modules.
+        """
         raise NotImplementedError("Subclass must implement abstract method")
 
     # ==================================================================================================================
-    # event_one_loop :
-    def event_one_loop(self, param1=None):
-        self.on_manage()
-
-    # ==================================================================================================================
-    # _start : Our own private internal start that will be the hook for the Python BaseThread. Not to be confused with
-    #           the start function that is to be call client side to initiated the thread.
-    def _start(self, param1=None):
-        self.is_running = True
+    def _start(self):
+        """ _start Description : (private visibility) :
+            Our own private internal start that will be the hook for the Python BaseThread. Not to be confused with the
+            start function that is to be call client side to initiated the thread
+        """
+        self.setRunning(True)
         self.load()
         self.main()

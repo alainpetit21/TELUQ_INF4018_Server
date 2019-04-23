@@ -1,3 +1,8 @@
+"""
+Module for CherryPyExposureINF4018_Server class. 1 vclasses in this module : CherryPyExposureINF4018_Server
+------------------------------------------------------------------------------------------------------------------------
+"""
+
 # ======================================================================================================================
 # importing external modules
 import cherrypy
@@ -20,15 +25,15 @@ class CherryPyExposureINF4018_Server(CherryPyExposure):
             browser.
     """
 
-    def __init__(self, p_obj_rest_service=None):
+    def __init__(self, pObjRESTfulService=None):
         """ __init__ Description : (public visibility) :
             Constructor of the WebAppINF4018_Server_CherryPyExposure object.
 
         Parameters :
-            :param p_obj_rest_service: defaulted to none. If the WebApp is using a REST service in addition of the
+            :param pObjRESTfulService: defaulted to none. If the WebApp is using a REST service in addition of the
             WebApp, this parameter will countain an object of a class that define the POST, GET, PUT and DELETE methods.
         """
-        super().__init__(p_obj_rest_service)
+        super().__init__(pObjRESTfulService)
 
     @cherrypy.expose
     def index(self):
