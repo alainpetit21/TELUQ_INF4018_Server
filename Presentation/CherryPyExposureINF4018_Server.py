@@ -47,9 +47,9 @@ class CherryPyExposureINF4018_Server(CherryPyExposure):
         return """
                 <html>
                 <body>
-
+        
                 <h2>Welcome to WebAppINF4018_Server_CherryPyExposure</h2>
-
+        
                 </body>
                 </html>
         """

@@ -9,9 +9,6 @@ import logging
 
 
 # ======================================================================================================================
-from reportlab.lib.validators import isInstanceOf
-
-
 class App:
     """
     Class WebAppINF4018_Server Description :

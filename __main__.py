@@ -11,9 +11,10 @@ from Application.RESTfulServiceINF4018_Server import RESTfulServiceINF4018_Serve
 if __name__ == "__main__":
     print("Hello Python World")
 
-    objRESTfulAPI = RESTfulServiceINF4018_Server()
-    objCPExposure = CherryPyExposureINF4018_Server(objRESTfulAPI)
-    obj_app = WebAppINF4018_Server(objCPExposure)
+    # objRESTfulAPI = RESTfulServiceINF4018_Server()
+    # objCPExposure = CherryPyExposureINF4018_Server(objRESTfulAPI)
+    # obj_app = WebAppINF4018_Server(objCPExposure)
+    obj_app = WebAppINF4018_Server()
 
     obj_app.load()
     obj_app.main()
