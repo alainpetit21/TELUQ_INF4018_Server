@@ -45,11 +45,11 @@ class CherryPyExposureINF4018_Server(CherryPyExposure):
             with the open() function.
         """
         return """
-                <html>
+            <html>
                 <body>
         
-                <h2>Welcome to WebAppINF4018_Server_CherryPyExposure</h2>
+                    <h2>Welcome to WebAppINF4018_Server_CherryPyExposure</h2>
         
                 </body>
-                </html>
+            </html>
         """

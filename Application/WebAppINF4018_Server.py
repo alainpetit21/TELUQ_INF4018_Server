@@ -1,75 +1,11 @@
 """
-Module for WebAppINF4018_Server class. 2 classes in this module : WebAppINF4018_Server, RESTServiceINF4018_Server
+Module for WebAppINF4018_Server class. 1 classes in this module : WebAppINF4018_Server
 ------------------------------------------------------------------------------------------------------------------------
 """
-# ======================================================================================================================
-# importing external modules
-import cherrypy
-import os
-import xml.dom.minidom
 
 # ======================================================================================================================
 # importing library modules
-from CrossCuttingConcerns.WebApp import WebApp, CherryPyExposure
-from Presentation.CherryPyExposureINF4018_Server import CherryPyExposureINF4018_Server
-
-
-@cherrypy.expose
-class RESTServiceINF4018_Server(object):
-    """
-    Class MyCherryPyRestService Description :
-        Unused for now, reserved for future support.
-    Class Attributes :
-    """
-
-    def __init__(self):
-        print ("In constructor")
-
-    @cherrypy.tools.accept(media='text/xml')
-    def POST(self, userID, time):
-        """ POST Description : (public visibility) :
-            Unused, reserved for future usage. In a REST-ful API, this function gets call for each HTTP POST request
-            (usually Upating the Service).
-
-        Parameters :
-        """
-        strCWD = os.getcwd()
-        strData = cherrypy.request.body.read()
-        print(strData)
-
-
-        with open(strCWD + "/SavedSessions/{}-{}.xml".format(userID, time), "wb") as f:
-            f.write(strData)
-
-        return "POST"
-
-    def GET(self):
-        """ GET Description : (public visibility) :
-            Unused, reserved for future usage. In a REST-ful API, this function gets call for each HTTP GET request
-            (usually Reading from the Service).
-
-        Parameters :
-        """
-        return "GET"
-
-    def PUT(self, strXML):
-        """ PUT Description : (public visibility) :
-            Unused, reserved for future usage. In a REST-ful API, this function gets call for each HTTP PUT request
-            (usually Creating an entry into the Service).
-
-        Parameters :
-        """
-
-        return "PUT"
-
-    def DELETE(self):
-        """ DELETE Description : (public visibility) :
-            Unused, reserved for future usage. In a REST-ful API, this function gets call for each HTTP DELETE request
-            (usually removing an entry from the Service).
-
-        Parameters :
-        """
-        return "DELETE"
+from CrossCuttingConcerns.WebApp import WebApp
 
 
 class WebAppINF4018_Server(WebApp):
@@ -84,14 +20,12 @@ class WebAppINF4018_Server(WebApp):
         idx_my_model: DomainFacade : Unused reserved for future usages.
     """
 
-    def __init__(self):
+    def __init__(self, objExposure):
         """ __init__ Description : (public visibility) :
             Constructor methods that will create this object. I does not do a lot but, overload the BaseClass
             construction call and initialization the class attributes for this instance.
         """
-        super().__init__(p_str_thread_name="AppNakatomiPlaza", pObjWebappExposure=CherryPyExposureINF4018_Server(RESTServiceINF4018_Server()))
-
-        self.idx_my_domain = None
+        super().__init__(p_str_thread_name="WebAppINF4018_Server", pObjWebappExposure=objExposure)
 
 
     def load(self):

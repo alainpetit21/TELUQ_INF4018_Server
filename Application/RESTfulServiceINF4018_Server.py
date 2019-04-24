@@ -31,6 +31,7 @@ class RESTfulServiceINF4018_Server:
 
         Parameters :
         """
+
         strDataXML = cherrypy.request.body.read()
 
         #Simply save the received Xml string as per received for the user and the time of transmition
@@ -39,19 +40,13 @@ class RESTfulServiceINF4018_Server:
 
         return "POST"
     # ==================================================================================================================
-    def GET(self, userID, time):
+    def GET(self):
         """ GET Description : (public visibility) :
             Unused, reserved for future usage. In a REST-ful API, this function gets call for each HTTP GET request
             (usually Reading from the Service).
 
         Parameters :
         """
-        strDataXML = cherrypy.request.body.read()
-
-        #Simply save the received Xml string as per received for the user and the time of transmition
-        with open(os.getcwd() + "/SavedSessions/{}-{}.xml".format(userID, time), "wb") as file:
-            file.write(strDataXML)
-
         return "GET"
 
     # ==================================================================================================================
@@ -73,22 +68,3 @@ class RESTfulServiceINF4018_Server:
         Parameters :
         """
         return "DELETE"
-
-
-#
-#    def POST(self, userID, time):
-#        """ POST Description : (public visibility) :
-#            Post exposure of our Server. This is where we received the XML Stream from the client.
-#            In a REST-ful API, this function gets call for each HTTP POST request
-#            (usually Upating the Service).
-#
-#        Parameters :
-#        """
-#        strDataXML = cherrypy.request.body.read()
-#
-#        #Simply save the received Xml string as per received for the user and the time of transmition
-#        with open(os.getcwd() + "/SavedSessions/{}-{}.xml".format(userID, time), "wb") as file:
-#            file.write(strDataXML)
-#
-#        return "POST"
-#

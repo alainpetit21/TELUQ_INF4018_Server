@@ -22,28 +22,11 @@ class CherryPyExposure(Thread):
         kinda encapslutae basic Cherrypy jo into simple way of using Cherrypy.
 
     Class Attributes (Static attributes):
-        dicConfigParams : A Python dictionary that countrain several parameters expetioly for the routes exposures
+        None
 
     Instance Attributes :
         None
     """
-    # ==================================================================================================================
-    # Class attributes
-    dicConfigParams = {
-        '/': {
-            'tools.sessions.on': True,
-            'tools.staticdir.root': os.path.abspath(os.getcwd() + "/Web")
-        },
-        '/rest_service': {
-            'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
-            'tools.response_headers.on': True,
-            'tools.response_headers.headers': [('Content-Type', 'text/plain')],
-        },
-        '/public': {
-            'tools.staticdir.on': True,
-            'tools.staticdir.dir': './public'
-        }
-    }
 
     # ==================================================================================================================
     def __init__(self, pObjRESTfulService=None):
@@ -51,7 +34,7 @@ class CherryPyExposure(Thread):
             Constructor for a new CherryPyExposure object, basically redirecting to super classes the construction.
         """
         super().__init__("Thread-WebAppCherryPy")
-        self.obJRESTfulService = pObjRESTfulService
+        self.rest_service = pObjRESTfulService          #name must match the Exposure
 
     # ==================================================================================================================
     def load(self):
@@ -69,9 +52,27 @@ class CherryPyExposure(Thread):
             Event (callback) for one loop of execution. In this exemple, 1 loop is all we need since quickstart is
             blocking.
         """
-        cherrypy.quickstart(self, '/', CherryPyExposure.dicConfigParams)    # this call is blocking (e.g. when we go to
-                                                                            # the next line it mean that the server has
-                                                                            # ended).
+
+        # A Python dictionary that contains several parameters especially for the http routes exposures
+        dicConfigParams = {
+            '/': {
+                'tools.sessions.on': True,
+                'tools.staticdir.root': os.path.abspath(os.getcwd() + "/Web")
+            },
+            '/rest_service': {
+                'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
+                'tools.response_headers.on': True,
+                'tools.sessions.on': True,
+                'tools.response_headers.headers': [('Content-Type', 'text/plain'), ('Content-Type', 'text/xml')],
+            },
+            '/public': {
+                'tools.staticdir.on': True,
+                'tools.staticdir.dir': './public'
+            }
+        }
+
+        cherrypy.quickstart(self, '/', dicConfigParams) # this call is blocking (e.g. when we go to the next line it
+                                                        # mean that the server has ended).
         self.setRunning(False)                      # This is why we need to stop the thread after the server has ended.
 
 
