@@ -17,12 +17,6 @@ class CherryPyExposureINF4018_Server(CherryPyExposure):
     Class WebAppINF4018_Server_CherryPyExposure Description :
         The purpose of this class is to be the "main" exposure object for the whole WebApp and either display the main
         page or dispatch to sub-App.
-    Class Attributes :
-        dic_SubCherryPyExposure:dict : Python dictionary that will. The WebApp.load() will update this value with the
-        proper exposur instance for each PluginWebApp.
-
-        strWebExposureName:str : String that will be the tag that will be used to access this plugin app from the
-            browser.
     """
 
     def __init__(self, pObjRESTfulService=None):

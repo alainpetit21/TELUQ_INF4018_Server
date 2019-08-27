@@ -39,32 +39,3 @@ class RESTfulServiceINF4018_Server:
             file.write(strDataXML)
 
         return "POST"
-    # ==================================================================================================================
-    def GET(self):
-        """ GET Description : (public visibility) :
-            Unused, reserved for future usage. In a REST-ful API, this function gets call for each HTTP GET request
-            (usually Reading from the Service).
-
-        Parameters :
-        """
-        return "GET"
-
-    # ==================================================================================================================
-    def PUT(self):
-        """ PUT Description : (public visibility) :
-            Unused, reserved for future usage. In a REST-ful API, this function gets call for each HTTP PUT request
-            (usually Creating an entry into the Service).
-
-        Parameters :
-        """
-        return "PUT"
-
-    # ==================================================================================================================
-    def DELETE(self):
-        """ DELETE Description : (public visibility) :
-            Unused, reserved for future usage. In a REST-ful API, this function gets call for each HTTP DELETE request
-            (usually removing an entry from the Service).
-
-        Parameters :
-        """
-        return "DELETE"
